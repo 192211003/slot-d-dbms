@@ -1,0 +1,182 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| school             |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use school;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_school |
++------------------+
+| college          |
+| record           |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc college;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Regno   | int(11)     | YES  |     | NULL    |       |
+| Name    | varchar(15) | YES  |     | NULL    |       |
+| DOB     | date        | YES  |     | NULL    |       |
+| City    | varchar(15) | YES  |     | NULL    |       |
+| company | varchar(15) | YES  |     | NULL    |       |
+| revenue | int(10)     | YES  |     | NULL    |       |
+| sector  | varchar(7)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+7 rows in set (0.02 sec)
+
+mysql> ALTER TABLE college
+    -> DROP COLUMN DOB;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc college;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Regno   | int(11)     | YES  |     | NULL    |       |
+| Name    | varchar(15) | YES  |     | NULL    |       |
+| City    | varchar(15) | YES  |     | NULL    |       |
+| company | varchar(15) | YES  |     | NULL    |       |
+| revenue | int(10)     | YES  |     | NULL    |       |
+| sector  | varchar(7)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into college values('12', 'sandy', 'chennai', 'delltech', '10,000', 'tech');
+ERROR 1265 (01000): Data truncated for column 'revenue' at row 1
+mysql> desc school;
+ERROR 1146 (42S02): Table 'school.school' doesn't exist
+mysql> desc record;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int(7)      | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| mark  | int(3)      | YES  |     | NULL    |       |
+| class | varchar(5)  | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> TRUNCATE TABLE record;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into college values('12', 'sandy', 'chennai', 'delltech', '100', 'tech');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc college;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Regno   | int(11)     | YES  |     | NULL    |       |
+| Name    | varchar(15) | YES  |     | NULL    |       |
+| City    | varchar(15) | YES  |     | NULL    |       |
+| company | varchar(15) | YES  |     | NULL    |       |
+| revenue | int(10)     | YES  |     | NULL    |       |
+| sector  | varchar(7)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from college;
++-------+-------+---------+----------+---------+--------+
+| Regno | Name  | City    | company  | revenue | sector |
++-------+-------+---------+----------+---------+--------+
+|    12 | sandy | chennai | delltech |     100 | tech   |
++-------+-------+---------+----------+---------+--------+
+1 row in set (0.00 sec)
+
+
+mysql>  create table clg(id int, name varchar(10), rank varchar(20), class varchar(100), section varchar(50));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc clg;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int(11)      | YES  |     | NULL    |       |
+| name    | varchar(10)  | YES  |     | NULL    |       |
+| rank    | varchar(20)  | YES  |     | NULL    |       |
+| class   | varchar(100) | YES  |     | NULL    |       |
+| section | varchar(50)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> insert into clg values('9001', 'ram', 'first', 'eleventh', 'b');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from clg
+    -> select * from clg;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from clg' at line 2
+mysql> select * from clg;
++------+------+-------+----------+---------+
+| id   | name | rank  | class    | section |
++------+------+-------+----------+---------+
+| 9001 | ram  | first | eleventh | b       |
++------+------+-------+----------+---------+
+1 row in set (0.00 sec)
+
+mysql> insert into clg values('7002', 'rohit', 'seven', 'tenth', 'c');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from clg;
++------+-------+-------+----------+---------+
+| id   | name  | rank  | class    | section |
++------+-------+-------+----------+---------+
+| 9001 | ram   | first | eleventh | b       |
+| 7002 | rohit | seven | tenth    | c       |
++------+-------+-------+----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> insert into clg values('8092', 'five', 'nine', 'seventh', 'a');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * form clg;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'form clg' at line 1
+mysql> select * from clg;
++------+-------+-------+----------+---------+
+| id   | name  | rank  | class    | section |
++------+-------+-------+----------+---------+
+| 9001 | ram   | first | eleventh | b       |
+| 7002 | rohit | seven | tenth    | c       |
+| 8092 | five  | nine  | seventh  | a       |
++------+-------+-------+----------+---------+
+3 rows in set (0.01 sec)
+
+mysql> desc clg;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int(11)      | YES  |     | NULL    |       |
+| name    | varchar(10)  | YES  |     | NULL    |       |
+| rank    | varchar(20)  | YES  |     | NULL    |       |
+| class   | varchar(100) | YES  |     | NULL    |       |
+| section | varchar(50)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> ALTER TABLE clg
+    -> ADD PRIMARY KEY(id);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc clg;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int(11)      | NO   | PRI | 0       |       |
+| name    | varchar(10)  | YES  |     | NULL    |       |
+| rank    | varchar(20)  | YES  |     | NULL    |       |
+| class   | varchar(100) | YES  |     | NULL    |       |
+| section | varchar(50)  | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
